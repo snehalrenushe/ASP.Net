@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Signin.aspx.cs" Inherits="Signin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="RecoverPassword.aspx.cs" Inherits="RecoverPassword" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Sign In</title>
+    <title>Recover Password</title>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +19,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    <div>
+        
+        <div>
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -51,81 +52,68 @@
                                 <li><a href="#">Legggings</a></li>
                                 <li><a href="#">Denims</a></li>
                             </ul>
-                            <li><a href="Signup.aspx">Signup</a></li>
-                            <li class="active"><a href="Signin.aspx">Sign in</a></li>
+                            <li><a href="Signin.aspx">Sign in</a></li>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
-    <br />
-    <br />
-    <br />
-    <!--SIGNIN PAGE -->
+    </div>
 
     <div class="container">
         <div class="form-horizontal">
-           <h2>Login Form</h2>
-           <hr />
-            <div class = "form-group">
-                <asp:Label ID="Label1" cssClass="col-md-2 control-label" runat="server" Text="Username"></asp:Label>
-                <div class="col-md-3">
-                    <asp:TextBox ID="tb_Username" cssClass="form-control" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfv_Username" runat="server" cssClass="text-danger" ErrorMessage="Please Enter UserName" ControlToValidate="tb_Username" ForeColor="Red"></asp:RequiredFieldValidator>
-                </div>
-            </div>
-
-            <div class = "form-group">
-                <asp:Label ID="Label2" cssClass="col-md-2 control-label" runat="server" Text="Password"></asp:Label>
-                <div class="col-md-3">
-                    <asp:TextBox ID="tb_Password" cssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfv_Password" runat="server" cssClass="text-danger" ErrorMessage="Please Enter Password" ControlToValidate="tb_Password" ForeColor="Red"></asp:RequiredFieldValidator>
-                </div>
-            </div>
-
-            <div class = "form-group">
-            <div class="col-md-2 "></div>
-                <div class="col-md-6">
-                    <asp:CheckBox ID="cb_Remember_Password" runat="server" />
-                    <asp:Label ID="Label3" cssClass="control-label" runat="server" Text="Remember Me"></asp:Label>
-                </div>
-            </div>
+        <br />
+        <br />
+        <br />
+            <h2>Reset Password</h2>
+            <hr />
+            <h3></h3>
+            <div class ="form-group">
+                <asp:Label ID="lblMsg" CssClass ="col-md-2 control-label" runat="server" Visible="False" Font-Bold="True" Font-Size="X-Large"></asp:Label>
             
-
-            <div class = "form-group">
-            <div class="col-md-2 "></div>
-                <div class="col-md-6">
-                   <asp:Button ID="btn_Login" cssClass="btn btn-success" runat="server" 
-                        Text="Login&raquo;" onclick="btn_Login_Click" />
-                    <asp:HyperLink ID="HyperLink2" runat="server">Sign In</asp:HyperLink>
-                </div>
             </div>
 
-            <!-- FORGOT PASSWORD STARTS --->
 
-            <div class = "form-group">
-            <div class="col-md-2 "></div>
-                <div class="col-md-6">
-                <asp:HyperLink ID="forgetpass" runat="server" NavigateUrl="~/ForgotPassword.aspx">Forget Password</asp:HyperLink>
+            <div class ="form-group">
+                    <asp:Label ID="lblNewPassword" CssClass ="col-md-2 control-label" 
+                        runat="server" Text="Enter New Password : " Visible="False"></asp:Label>
+                    <div class ="col-md-3">
+                        <asp:TextBox ID="tb_New_Password" CssClass =" form-control" TextNode="Password" 
+                            runat="server" Visible="False"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorNewPass" CssClass ="Text-danger" runat="server" ErrorMessage="Enter Your New Password : " ControlToValidate="tb_New_Password" ForeColor="Red"></asp:RequiredFieldValidator>
+
+                    </div>
+
                 </div>
-            </div>
-            
-            <!-- FORGOT PASSWORD END --->
 
-            <div class = "form-group">
-            <div class="col-md-2 "></div>
-                <div class="col-md-6">
-                    <asp:Label ID="lbl_error" CssClass="text-danger" runat="server"></asp:Label>
+                <div class ="form-group">
+                    <asp:Label ID="lblConfirmPassword" CssClass ="col-md-2 control-label" 
+                        runat="server" Text="Enter Confirm Password : " Visible="False"></asp:Label>
+                    <div class ="col-md-3">
+                        <asp:TextBox ID="tb_Confirm_Password" CssClass =" form-control" 
+                            TextNode="ConfirmPassword" runat="server" Visible="False"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorConfirmPass" CssClass ="Text-danger" runat="server" ErrorMessage="Enter Confirm Password : " ControlToValidate="tb_Confirm_Password" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:CompareValidator ID="CompareValidatorPass" runat="server" ForeColor="Red"
+                            ErrorMessage="Confirm Password Not Matched...Try Again !!!" 
+                            ControlToCompare="tb_New_Password" ControlToValidate="tb_Confirm_Password"></asp:CompareValidator>
+                    </div>
+
                 </div>
-            </div>
 
-         </div>
-     </div>
+                <div class ="form-group">
+                    <div class ="col-md-2"></div>
+                    <div class ="col-md-6">
+                        <asp:Button ID="btn_Reset_Pass" CssClass ="btn btn-default" runat="server" 
+                            Text="Reset" Visible="False" onclick="btn_Reset_Pass_Click"/>
+                     </div>
+                </div>
 
-    <!--SIGNIN PAGE END-->
+        </div>
+    </div>
+
+    </form>
 
     <!-- FOOTER SECTION -->
 
@@ -138,6 +126,6 @@
     </footer>
 
     <!-- FOOTER SECTION END-->
-    </form>
+
 </body>
 </html>
