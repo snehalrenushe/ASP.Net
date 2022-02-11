@@ -67,6 +67,13 @@ public partial class RecoverPassword : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@Uid", Uid);
             cmd.ExecuteNonQuery();
             Response.Write("<script> alert('Password Reset Successfully done');</script>");
+            Clear_Controls();
         }
+    }
+
+    private void Clear_Controls()
+    {
+        tb_Confirm_Password.Text = "";
+        tb_New_Password.Text = "";
     }
 }
