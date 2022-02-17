@@ -29,7 +29,17 @@ public partial class RecoverPassword : System.Web.UI.Page
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
 
                 sda.Fill(dt);
-                Uid = Convert.ToInt32(dt.Rows[0][1]);
+
+                if (dt.Rows.Count != 0)
+                {
+                    Uid = Convert.ToInt32(dt.Rows[0][1]);
+                }
+                else
+                {
+                    lblMsg.Text = "Your Password Reset Link is Expired or Invalid...try again";
+                    lblMsg.ForeColor = System.Drawing.Color.Red;
+                }
+                
             }
             else
             {
@@ -58,16 +68,26 @@ public partial class RecoverPassword : System.Web.UI.Page
     }
     protected void btn_Reset_Pass_Click(object sender, EventArgs e)
     {
-        using (SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["EShoppingDB"].ConnectionString))
+        if (tb_New_Password.Text != ""  && tb_Confirm_Password.Text != "" && tb_New_Password.Text == tb_Confirm_Password.Text)
         {
-            Con.Open();
-            SqlCommand cmd = new SqlCommand("Update Signup set Password=@p,Confirm_Password=@cp where Uid=@Uid", Con);
-            cmd.Parameters.AddWithValue("@p", tb_New_Password.Text);
-            cmd.Parameters.AddWithValue("@cp", tb_Confirm_Password.Text);
-            cmd.Parameters.AddWithValue("@Uid", Uid);
-            cmd.ExecuteNonQuery();
-            Response.Write("<script> alert('Password Reset Successfully done');</script>");
-            Clear_Controls();
+            using (SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["EShoppingDB"].ConnectionString))
+            {
+                Con.Open();
+                SqlCommand cmd = new SqlCommand("Update Signup set Password=@p,Confirm_Password=@cp where Uid=@Uid", Con);
+                cmd.Parameters.AddWithValue("@p", tb_New_Password.Text);
+                cmd.Parameters.AddWithValue("@cp", tb_Confirm_Password.Text);
+                cmd.Parameters.AddWithValue("@Uid", Uid);
+                cmd.ExecuteNonQuery();
+                Response.Write("<script> alert('Password Reset Successfully done');</script>");
+
+
+
+                SqlCommand cmd1 = new SqlCommand("Delete From ForgotPass where Uid = '" + Uid + "'", Con);
+                cmd.ExecuteNonQuery();
+                Response.Write("<script> alert('Password Reset Successfully done');</script>");
+                Response.Redirect("~/Signin.aspx");
+                Clear_Controls();
+            }
         }
     }
 
