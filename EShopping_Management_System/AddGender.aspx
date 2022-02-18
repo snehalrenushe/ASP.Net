@@ -40,7 +40,7 @@
              <table class="table">
                   <thead>
                     <tr>
-                        <th>#</th>
+                        <th>ID</th>
                         <th>Gender</th>
                         <th>Edit</th>
 

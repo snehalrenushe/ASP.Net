@@ -15,6 +15,7 @@ public partial class AddSubCategory : System.Web.UI.Page
         if (!IsPostBack)
         {
             Bind_Main_Category();
+            Bind_Subcategory_Repeatr();
         }
     }
 
@@ -40,6 +41,23 @@ public partial class AddSubCategory : System.Web.UI.Page
          }
     }
 
+    private void Bind_Subcategory_Repeatr()
+    {
+        using (SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["EShoppingDB"].ConnectionString))
+        {
+            using (SqlCommand Cmd = new SqlCommand("select A.*,B.* from Subcategory_Details A inner join Category_Details B on B.Category_ID = A.Main_Category_ID ", Con))
+            {
+                using (SqlDataAdapter SDA = new SqlDataAdapter(Cmd))
+                {
+                    DataTable dt = new DataTable();
+                    SDA.Fill(dt);
+                    rptrSubCat.DataSource = dt;
+                    rptrSubCat.DataBind();
+                }
+            }
+        }
+    }
+
     protected void btn_Add_SubCategory_Click(object sender, EventArgs e)
     {
         using (SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["EShoppingDB"].ConnectionString))
@@ -58,5 +76,7 @@ public partial class AddSubCategory : System.Web.UI.Page
 
             Con.Close();
         }
+
+        Bind_Subcategory_Repeatr();
     }
 }

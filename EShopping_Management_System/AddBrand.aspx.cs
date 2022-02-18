@@ -12,8 +12,12 @@ public partial class AddBrand : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!IsPostBack)
+        {
+            Bind_Brand_Repeater();
+        }
     }
+
     protected void btnAddBrand_Click(object sender, EventArgs e)
     {
         using (SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["EShoppingDB"].ConnectionString))
@@ -33,6 +37,23 @@ public partial class AddBrand : System.Web.UI.Page
             tb_Brand.Focus();
 
             Con.Close();
+        }
+    }
+
+    private void Bind_Brand_Repeater()
+    {
+        using (SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["EShoppingDB"].ConnectionString))
+        {
+            using (SqlCommand Cmd = new SqlCommand("select * from Brand_Details", Con))
+            {
+                using (SqlDataAdapter SDA = new SqlDataAdapter(Cmd))
+                {
+                    DataTable dt = new DataTable();
+                    SDA.Fill(dt);
+                    rptrBrands.DataSource = dt;
+                    rptrBrands.DataBind();
+                }
+            }
         }
     }
 }

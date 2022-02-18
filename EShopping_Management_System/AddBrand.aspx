@@ -30,41 +30,42 @@
         <h1>Brands</h1>
         <hr />
 
- <div class="panel panel-default">
+        <div class="panel panel-default">
 
-     <div class="panel-heading"> All Brands</div>
+            <div class="panel-heading"> All Brands</div>
 
-      <asp:repeater ID="rptrBrands" runat="server">
+                <asp:repeater ID="rptrBrands" runat="server">
 
-         <HeaderTemplate>
-             <table class="table">
-                  <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Brand</th>
-                        <th>Edit</th>
+                     <HeaderTemplate>
+                         <table class="table">
+                              <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Brand</th>
+                                    <th>Edit</th>
 
-                    </tr>
-                 </thead>
-            <tbody>
-         </HeaderTemplate>
+                                </tr>
+                             </thead>
+                        <tbody>
+                     </HeaderTemplate>
 
-         <ItemTemplate>
-             <tr>
-                 <th> <%# Eval("BrandID") %> </th>
-                 <td><%# Eval("Name") %>   </td>
-                 <td>Edit</td>
-             </tr>
-         </ItemTemplate>
+                     <ItemTemplate>
+                         <tr>
+                             <th> <%# Eval("Brand_ID")%> </th>
+                             <td><%# Eval("Brand_Name")%>   </td>
+                             <td>Edit</td>
+                         </tr>
+                     </ItemTemplate>
 
-         <FooterTemplate>
-             </tbody>
+                     <FooterTemplate>
+                         </tbody>
 
-              </table>
-         </FooterTemplate>
+                          </table>
+                     </FooterTemplate>
 
-      </asp:repeater>
-   </div>
+                </asp:repeater>
+         </div>
+
 </div>
 
 </asp:Content>

@@ -4,7 +4,7 @@
 <br<<br /><br /><br />
 <div class ="container ">
             <div class ="form-horizontal ">
-                <h2>Add Brand</h2>
+                <h2>Add Category</h2>
                 <hr />
                 <div class ="form-group">
                     <asp:Label ID="Label1" CssClass ="col-md-2 control-label " runat="server" Text="Category Name"></asp:Label>
@@ -34,14 +34,14 @@
 
      <div class="panel-heading"> All Category</div>
 
-      <asp:repeater ID="rptrBrands" runat="server">
+      <asp:repeater ID="rptrCategory" runat="server">
 
          <HeaderTemplate>
              <table class="table">
                   <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Brand</th>
+                        <th>ID</th>
+                        <th>Category</th>
                         <th>Edit</th>
 
                     </tr>
@@ -51,7 +51,7 @@
 
          <ItemTemplate>
              <tr>
-                 <th> <%# Eval("CategoryID") %> </th>
+                 <th> <%# Eval("Category_ID")%> </th>
                  <td><%# Eval("Category_Name") %>   </td>
                  <td>Edit</td>
              </tr>

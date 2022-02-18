@@ -13,7 +13,7 @@ public partial class AddCategory : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        Bind_Category_Reapter();
     }
 
     protected void btn_Add_Category_Click(object sender, EventArgs e)
@@ -35,6 +35,23 @@ public partial class AddCategory : System.Web.UI.Page
             tb_Category.Focus();
 
             Con.Close();
+        }
+    }
+
+    private void Bind_Category_Reapter()
+    {
+        using (SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["EShoppingDB"].ConnectionString))
+        {
+            using (SqlCommand Cmd = new SqlCommand("select * from Category_Details", Con))
+            {
+                using (SqlDataAdapter SDA = new SqlDataAdapter(Cmd))
+                {
+                    DataTable dt = new DataTable();
+                    SDA.Fill(dt);
+                    rptrCategory.DataSource = dt;
+                    rptrCategory.DataBind();
+                }
+            }
         }
     }
 }
