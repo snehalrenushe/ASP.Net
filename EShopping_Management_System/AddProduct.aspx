@@ -33,7 +33,6 @@
                </div>
            </div>
 
-
            <div class ="form-group">
                <asp:Label ID="Label4" runat="server" CssClass ="col-md-2 control-label" Text="Brand"></asp:Label>
                <div class ="col-md-3">
@@ -41,15 +40,12 @@
                </div>
            </div>
 
-
-
            <div class ="form-group">
                <asp:Label ID="Label5" runat="server" CssClass ="col-md-2 control-label" Text="Category"></asp:Label>
                <div class ="col-md-3">
                    <asp:DropDownList ID="ddl_Category" CssClass ="form-control" runat="server"></asp:DropDownList>
                </div>
            </div>
-
 
            <div class ="form-group">
                <asp:Label ID="Label6" runat="server" CssClass ="col-md-2 control-label" Text="SubCategory"></asp:Label>
@@ -72,14 +68,12 @@
                </div>
            </div>
 
-
             <div class ="form-group">
                <asp:Label ID="Label8" runat="server" CssClass ="col-md-2 control-label" Text="Description"></asp:Label>
                <div class ="col-md-3">
                    <asp:TextBox ID="tb_Description" TextMode ="MultiLine"  CssClass ="form-control" runat="server"></asp:TextBox>
                </div>
            </div>
-
 
             <div class ="form-group">
                <asp:Label ID="Label9" runat="server" CssClass ="col-md-2 control-label" Text="Product Details"></asp:Label>
@@ -166,7 +160,6 @@
                         
                     </div>
                 </div>
-
        </div>
 
     </div>
