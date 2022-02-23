@@ -42,7 +42,7 @@ public partial class AddGender : System.Web.UI.Page
 
             Cmd.ExecuteNonQuery();
 
-            Response.Write("<script> alert ('Gender Added Successfully!!! '); </script>");
+            Response.Write("<script>alert('Gender Added Successfully!!! ');</script>");
             tb_Gender.Text = "";
 
             tb_Gender.Focus();

@@ -33,6 +33,7 @@
                </div>
            </div>
 
+
            <div class ="form-group">
                <asp:Label ID="Label4" runat="server" CssClass ="col-md-2 control-label" Text="Brand"></asp:Label>
                <div class ="col-md-3">
@@ -40,33 +41,50 @@
                </div>
            </div>
 
+
+
            <div class ="form-group">
                <asp:Label ID="Label5" runat="server" CssClass ="col-md-2 control-label" Text="Category"></asp:Label>
                <div class ="col-md-3">
-                   <asp:DropDownList ID="ddl_Category" CssClass ="form-control" runat="server"></asp:DropDownList>
+                   <asp:DropDownList ID="ddl_Category" CssClass ="form-control" runat="server" 
+                       AutoPostBack = "True" 
+                       onselectedindexchanged="ddl_Category_SelectedIndexChanged"></asp:DropDownList>
                </div>
            </div>
+
 
            <div class ="form-group">
                <asp:Label ID="Label6" runat="server" CssClass ="col-md-2 control-label" Text="SubCategory"></asp:Label>
                <div class ="col-md-3">
-                   <asp:DropDownList ID="ddl_SubCategory" CssClass ="form-control" runat="server"></asp:DropDownList>
+                   <asp:DropDownList ID="ddl_SubCategory" CssClass ="form-control" runat="server" 
+                       AutoPostBack="True" 
+                       onselectedindexchanged="ddl_SubCategory_SelectedIndexChanged"></asp:DropDownList>
                </div>
            </div>
 
            <div class ="form-group">
                <asp:Label ID="Label19" runat="server" CssClass ="col-md-2 control-label" Text="Gender"></asp:Label>
                <div class ="col-md-3">
-                   <asp:DropDownList ID="ddl_Gender" CssClass ="form-control" runat="server"></asp:DropDownList>
+                   <asp:DropDownList ID="ddl_Gender" CssClass ="form-control" runat="server" 
+                       AutoPostBack="True" onselectedindexchanged="ddl_Gender_SelectedIndexChanged1"></asp:DropDownList>
                </div>
            </div>
 
             <div class ="form-group">
                <asp:Label ID="Label7" runat="server" CssClass ="col-md-2 control-label" Text="Size"></asp:Label>
                <div class ="col-md-3">
-                   <asp:TextBox ID="tb_Dynamic_size" CssClass ="form-control" runat="server"></asp:TextBox>
+                   <asp:CheckBoxList ID="cbl_Size" CssClass ="form-control" RepeatDirection="Horizontal" runat="server">
+                   </asp:CheckBoxList>
                </div>
            </div>
+
+           <%--<div class ="form-group">
+               <asp:Label ID="Label20" runat="server" CssClass ="col-md-2 control-label" Text="Quantity"></asp:Label>
+               <div class ="col-md-3">
+                   <asp:TextBox ID="tb_Quantity" CssClass ="form-control" runat="server"></asp:TextBox>
+               </div>
+           </div>--%>
+
 
             <div class ="form-group">
                <asp:Label ID="Label8" runat="server" CssClass ="col-md-2 control-label" Text="Description"></asp:Label>
@@ -74,6 +92,7 @@
                    <asp:TextBox ID="tb_Description" TextMode ="MultiLine"  CssClass ="form-control" runat="server"></asp:TextBox>
                </div>
            </div>
+
 
             <div class ="form-group">
                <asp:Label ID="Label9" runat="server" CssClass ="col-md-2 control-label" Text="Product Details"></asp:Label>
@@ -160,6 +179,7 @@
                         
                     </div>
                 </div>
+
        </div>
 
     </div>

@@ -21,9 +21,10 @@
 
                         <asp:Button ID="btnAddBrand" CssClass ="btn btn-success " runat="server" 
                             Text="Add Brand" onclick="btnAddBrand_Click"/>
- 
+                        
                     </div>
                 </div>
+
             </div>
 
         <h1>Brands</h1>
@@ -42,10 +43,12 @@
                                     <th>ID</th>
                                     <th>Brand</th>
                                     <th>Edit</th>
+
                                 </tr>
                              </thead>
                         <tbody>
                      </HeaderTemplate>
+
                      <ItemTemplate>
                          <tr>
                              <th> <%# Eval("Brand_ID")%> </th>
@@ -53,8 +56,10 @@
                              <td>Edit</td>
                          </tr>
                      </ItemTemplate>
+
                      <FooterTemplate>
                          </tbody>
+
                           </table>
                      </FooterTemplate>
 
