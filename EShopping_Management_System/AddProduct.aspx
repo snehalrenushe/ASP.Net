@@ -78,12 +78,12 @@
                </div>
            </div>
 
-           <%--<div class ="form-group">
+           <div class ="form-group">
                <asp:Label ID="Label20" runat="server" CssClass ="col-md-2 control-label" Text="Quantity"></asp:Label>
                <div class ="col-md-3">
                    <asp:TextBox ID="tb_Quantity" CssClass ="form-control" runat="server"></asp:TextBox>
                </div>
-           </div>--%>
+           </div>
 
 
             <div class ="form-group">

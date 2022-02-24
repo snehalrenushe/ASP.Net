@@ -152,34 +152,33 @@ public partial class AddProduct : System.Web.UI.Page
         {
             SqlCommand cmd = new SqlCommand("sp_InsertProduct", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Product_ID", tb_Product_Name.Text);
-            cmd.Parameters.AddWithValue("@PName", tb_Product_Name.Text);
-            cmd.Parameters.AddWithValue("@PPrice", tb_Price.Text);
-            cmd.Parameters.AddWithValue("@PSelPrice", tb_sell_Price.Text);
-            cmd.Parameters.AddWithValue("@PBrandID", ddlBrand.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@PCategoryID", ddl_Category.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@PSubCatID", ddl_SubCategory.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@PGender", ddl_Gender.SelectedItem.Value);
-            cmd.Parameters.AddWithValue("@PDescription", tb_Description.Text);
-            cmd.Parameters.AddWithValue("@PProductDetails", tb_P_Detail.Text);
-            cmd.Parameters.AddWithValue("@PMaterialCare", tb_Mat_Care.Text);
+            cmd.Parameters.AddWithValue("@Product_Name", tb_Product_Name.Text);
+            cmd.Parameters.AddWithValue("@Purchase_Price", tb_Price.Text);
+            cmd.Parameters.AddWithValue("@Selling_Price", tb_sell_Price.Text);
+            cmd.Parameters.AddWithValue("@Brand_ID", ddlBrand.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@Category_ID", ddl_Category.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@Subcategory_ID", ddl_SubCategory.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@Gender", ddl_Gender.SelectedItem.Value);
+            cmd.Parameters.AddWithValue("@Description", tb_Description.Text);
+            cmd.Parameters.AddWithValue("@Product_Details", tb_P_Detail.Text);
+            cmd.Parameters.AddWithValue("@Material_Care", tb_Mat_Care.Text);
 
             if (ch_Free_Delivery.Checked == true)
             {
-                cmd.Parameters.AddWithValue("@FreeDelivery", 1.ToString());
+                cmd.Parameters.AddWithValue("@Free_Delivery", 1.ToString());
             }
             else
             {
-                cmd.Parameters.AddWithValue("@FreeDelivery", 0.ToString());
+                cmd.Parameters.AddWithValue("@Free_Delivery", 0.ToString());
             }
 
             if (ch_30_Ret.Checked == true)
             {
-                cmd.Parameters.AddWithValue("@30DayRet", 1.ToString());
+                cmd.Parameters.AddWithValue("@30_Day_Ret", 1.ToString());
             }
             else
             {
-                cmd.Parameters.AddWithValue("@30DayRet", 0.ToString());
+                cmd.Parameters.AddWithValue("@30_Day_Ret", 0.ToString());
             }
           
             if (cb_COD.Checked == true)
@@ -195,96 +194,103 @@ public partial class AddProduct : System.Web.UI.Page
             Int64 Product_ID = Convert.ToInt64(cmd.ExecuteScalar());
 
 
-            ////Insert size quantity
-            //for (int i = 0; i < cbl_Size.Items.Count; i++)
-            //{
-            //    if (cbl_Size.Items[i].Selected == true)
-            //    {
-            //        Int64 SizeID = Convert.ToInt64(cbl_Size.Items[i].Value);
-            //        int Quantity = Convert.ToInt32(tb_Quantity.Text);
+            //Insert size quantity
+            for (int i = 0; i < cbl_Size.Items.Count; i++)
+            {
+                if (cbl_Size.Items[i].Selected == true)
+                {
+                    Int64 SizeID = Convert.ToInt64(cbl_Size.Items[i].Value);
+                    int Quantity = Convert.ToInt32(tb_Quantity.Text);
 
-            //        SqlCommand cmd2 = new SqlCommand("insert into Product_Size_Quantity values('" + Product_ID + "','" + SizeID + "','" + Quantity + "')", con);
-            //        cmd2.ExecuteNonQuery();
-            //    }
-            //}
-            ////Insert and upload images
-            //if (fuImg01.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Images/ProductImages/") + Product_ID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+                    SqlCommand cmd2 = new SqlCommand("insert into Product_Size_Quantity values('" + Product_ID + "','" + SizeID + "','" + Quantity + "')", con);
+                    cmd2.ExecuteNonQuery();
+                }
+            }
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
+            //Insert and upload images
+            if (fuImg01.HasFile)
+            {
+                string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+                }
+                string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
 
-            //    SqlCommand cmd3 = new SqlCommand("insert into tblProductImages values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
-            //    cmd3.ExecuteNonQuery();
-            //}
+                fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+
+                SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
+                cmd3.ExecuteNonQuery();
+            }
+
             ////2nd fileupload
-            //if (fuImg02.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Images/ProductImages/") + PID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+            if (fuImg01.HasFile)
+            {
+                string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg02.PostedFile.FileName);
-            //    fuImg02.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "02" + Extention);
+                }
+                string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
 
-            //    SqlCommand cmd4 = new SqlCommand("insert into Product_Images values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "02" + "','" + Extention + "')", con);
-            //    cmd4.ExecuteNonQuery();
-            //}
+                fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+
+                SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
+                cmd3.ExecuteNonQuery();
+            }
 
             ////3rd file upload 
-            //if (fuImg03.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Images/ProductImages/") + PID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+            if (fuImg01.HasFile)
+            {
+                string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg03.PostedFile.FileName);
-            //    fuImg03.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "03" + Extention);
+                }
+                string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
 
-            //    SqlCommand cmd5 = new SqlCommand("insert into Product_Images values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "03" + "','" + Extention + "')", con);
-            //    cmd5.ExecuteNonQuery();
-            //}
+                fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+
+                SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
+                cmd3.ExecuteNonQuery();
+            }
+            
             ////4th file upload control
-            //if (fuImg04.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Images/ProductImages/") + PID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+            if (fuImg01.HasFile)
+            {
+                string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg04.PostedFile.FileName);
-            //    fuImg04.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "04" + Extention);
+                }
+                string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
 
-            //    SqlCommand cmd6 = new SqlCommand("insert into Product_Images values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "04" + "','" + Extention + "')", con);
-            //    cmd6.ExecuteNonQuery();
-            //}
+                fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+
+                SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
+                cmd3.ExecuteNonQuery();
+            }
 
             ////5th file upload
-            //if (fuImg05.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Images/ProductImages/") + PID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+            if (fuImg01.HasFile)
+            {
+                string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg05.PostedFile.FileName);
-            //    fuImg05.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "05" + Extention);
+                }
+                string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
 
-            //    SqlCommand cmd7 = new SqlCommand("insert into tblProductImages values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "05" + "','" + Extention + "')", con);
-            //    cmd7.ExecuteNonQuery();
-            //}
+                fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+
+                SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
+                cmd3.ExecuteNonQuery();
+            }
 
         }
     }
