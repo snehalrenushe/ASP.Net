@@ -70,7 +70,7 @@
                </div>
            </div>
 
-            <div class ="form-group">
+           <div class ="form-group">
                <asp:Label ID="Label7" runat="server" CssClass ="col-md-2 control-label" Text="Size"></asp:Label>
                <div class ="col-md-3">
                    <asp:CheckBoxList ID="cbl_Size" CssClass ="form-control" RepeatDirection="Horizontal" runat="server">
