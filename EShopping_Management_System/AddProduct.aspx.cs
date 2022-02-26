@@ -191,8 +191,7 @@ public partial class AddProduct : System.Web.UI.Page
             }
 
             con.Open();
-            Int64 Product_ID = Convert.ToInt64(cmd.ExecuteScalar());
-
+            Int64 PID = Convert.ToInt64(cmd.ExecuteScalar());
 
             //Insert size quantity
             for (int i = 0; i < cbl_Size.Items.Count; i++)
@@ -202,95 +201,95 @@ public partial class AddProduct : System.Web.UI.Page
                     Int64 SizeID = Convert.ToInt64(cbl_Size.Items[i].Value);
                     int Quantity = Convert.ToInt32(tb_Quantity.Text);
 
-                    SqlCommand cmd2 = new SqlCommand("insert into Product_Size_Quantity values('" + Product_ID + "','" + SizeID + "','" + Quantity + "')", con);
+                    SqlCommand cmd2 = new SqlCommand("insert into Product_Size_Quantity values('" + PID + "','" + SizeID + "','" + Quantity + "')", con);
                     cmd2.ExecuteNonQuery();
                 }
             }
 
-            ////Insert and upload images
-            //if (fuImg01.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+            //Insert and upload images
+            if (fuImg01.HasFile)
+            {
+                string SavePath = Server.MapPath("~/img/Product_Images/") + PID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
+                }
+                string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
 
-            //    fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+                fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
 
-            //    SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
-            //    cmd3.ExecuteNonQuery();
-            //}
+                SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
+                cmd3.ExecuteNonQuery();
+            }
 
-            //////2nd fileupload
-            //if (fuImg01.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+            ////2nd fileupload
+            if (fuImg02.HasFile)
+            {
+                string SavePath = Server.MapPath("~/img/Product_Images/") + PID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
+                }
+                string Extention = Path.GetExtension(fuImg02.PostedFile.FileName);
 
-            //    fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+                fuImg02.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "02" + Extention);
 
-            //    SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
-            //    cmd3.ExecuteNonQuery();
-            //}
+                SqlCommand cmd4 = new SqlCommand("insert into Product_Images values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "02" + "','" + Extention + "')", con);
+                cmd4.ExecuteNonQuery();
+            }
 
-            //////3rd file upload 
-            //if (fuImg01.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+            ////3rd file upload 
+            if (fuImg03.HasFile)
+            {
+                string SavePath = Server.MapPath("~/img/Product_Images/") + PID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
+                }
+                string Extention = Path.GetExtension(fuImg03.PostedFile.FileName);
 
-            //    fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+                fuImg03.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "03" + Extention);
 
-            //    SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
-            //    cmd3.ExecuteNonQuery();
-            //}
-            
-            //////4th file upload control
-            //if (fuImg01.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+                SqlCommand cmd5 = new SqlCommand("insert into Product_Images values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "03" + "','" + Extention + "')", con);
+                cmd5.ExecuteNonQuery();
+            }
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
+            ////4th file upload control
+            if (fuImg04.HasFile)
+            {
+                string SavePath = Server.MapPath("~/img/Product_Images/") + PID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+                }
+                string Extention = Path.GetExtension(fuImg04.PostedFile.FileName);
 
-            //    SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
-            //    cmd3.ExecuteNonQuery();
-            //}
+                fuImg04.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "04" + Extention);
 
-            //////5th file upload
-            //if (fuImg01.HasFile)
-            //{
-            //    string SavePath = Server.MapPath("~/Imag/Product_Images/") + Product_ID;
-            //    if (!Directory.Exists(SavePath))
-            //    {
-            //        Directory.CreateDirectory(SavePath);
+                SqlCommand cmd6 = new SqlCommand("insert into Product_Images values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "04" + "','" + Extention + "')", con);
+                cmd6.ExecuteNonQuery();
+            }
 
-            //    }
-            //    string Extention = Path.GetExtension(fuImg01.PostedFile.FileName);
+            ////5th file upload
+            if (fuImg05.HasFile)
+            {
+                string SavePath = Server.MapPath("~/img/Product_Images/") + PID;
+                if (!Directory.Exists(SavePath))
+                {
+                    Directory.CreateDirectory(SavePath);
 
-            //    fuImg01.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "01" + Extention);
+                }
+                string Extention = Path.GetExtension(fuImg05.PostedFile.FileName);
 
-            //    SqlCommand cmd3 = new SqlCommand("insert into Product_Images values('" + Product_ID + "','" + tb_Product_Name.Text.ToString().Trim() + "01" + "','" + Extention + "')", con);
-            //    cmd3.ExecuteNonQuery();
-            //}
+                fuImg05.SaveAs(SavePath + "\\" + tb_Product_Name.Text.ToString().Trim() + "05" + Extention);
+
+                SqlCommand cmd7 = new SqlCommand("insert into Product_Images values('" + PID + "','" + tb_Product_Name.Text.ToString().Trim() + "05" + "','" + Extention + "')", con);
+                cmd7.ExecuteNonQuery();
+            }
 
         }
     }
