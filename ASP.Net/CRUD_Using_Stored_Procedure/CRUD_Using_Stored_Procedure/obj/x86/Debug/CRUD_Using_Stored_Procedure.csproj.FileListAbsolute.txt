@@ -1,0 +1,8 @@
+C:\Users\91842\Desktop\Prog_Snehal\ASP.Net\CRUD_Using_Stored_Procedure\CRUD_Using_Stored_Procedure\bin\Debug\CRUD_Using_Stored_Procedure.exe
+C:\Users\91842\Desktop\Prog_Snehal\ASP.Net\CRUD_Using_Stored_Procedure\CRUD_Using_Stored_Procedure\bin\Debug\CRUD_Using_Stored_Procedure.pdb
+C:\Users\91842\Desktop\Prog_Snehal\ASP.Net\CRUD_Using_Stored_Procedure\CRUD_Using_Stored_Procedure\obj\x86\Debug\CRUD_Using_Stored_Procedure.CRUD_Application.resources
+C:\Users\91842\Desktop\Prog_Snehal\ASP.Net\CRUD_Using_Stored_Procedure\CRUD_Using_Stored_Procedure\obj\x86\Debug\CRUD_Using_Stored_Procedure.Properties.Resources.resources
+C:\Users\91842\Desktop\Prog_Snehal\ASP.Net\CRUD_Using_Stored_Procedure\CRUD_Using_Stored_Procedure\obj\x86\Debug\CRUD_Using_Stored_Procedure.csproj.GenerateResource.Cache
+C:\Users\91842\Desktop\Prog_Snehal\ASP.Net\CRUD_Using_Stored_Procedure\CRUD_Using_Stored_Procedure\obj\x86\Debug\CRUD_Using_Stored_Procedure.exe
+C:\Users\91842\Desktop\Prog_Snehal\ASP.Net\CRUD_Using_Stored_Procedure\CRUD_Using_Stored_Procedure\obj\x86\Debug\CRUD_Using_Stored_Procedure.pdb
+C:\Users\91842\Desktop\Prog_Snehal\ASP.Net\CRUD_Using_Stored_Procedure\CRUD_Using_Stored_Procedure\obj\x86\Debug\CRUD_Using_Stored_Procedure.csprojResolveAssemblyReference.cache
