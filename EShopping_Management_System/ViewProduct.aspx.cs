@@ -10,7 +10,6 @@ using System.Configuration;
 
 public partial class ViewProduct : System.Web.UI.Page
 {
-
     public static String CS = ConfigurationManager.ConnectionStrings["EShoppingDB"].ConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {

@@ -7,21 +7,26 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-using System.Globalization;
-using System.Threading;
 
-public partial class Cart : System.Web.UI.Page
+public partial class Payment : System.Web.UI.Page
 {
     public static String CS = ConfigurationManager.ConnectionStrings["EShoppingDB"].ConnectionString;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Session["USERNAME"] != null)
         {
-            BindProductCart();
+            if (!IsPostBack)
+            {
+                BindPriceData();
+            }
+        }
+        else
+        {
+            Response.Redirect("~/SignIn.aspx");
         }
     }
 
-    private void BindProductCart()
+    private void BindPriceData()
     {
         if (Request.Cookies["CartPID"] != null)
         {
@@ -30,7 +35,7 @@ public partial class Cart : System.Web.UI.Page
 
             if (CookieDataArray.Length > 0)
             {
-                h4Noitems.InnerText = "My Cart(" + CookieDataArray.Length + " items)";
+                //h4Noitems.InnerText = "My Cart(" + CookieDataArray.Length + " items)";
                 DataTable dt = new DataTable();
                 Int64 CartTotal = 0;
                 Int64 Total = 0;
@@ -58,74 +63,48 @@ public partial class Cart : System.Web.UI.Page
                 }
 
 
-                rptrCartProducts.DataSource = dt;
-                rptrCartProducts.DataBind();
-                divpricedetails.Visible = true;
+                divPriceDetails.Visible = true;
+
                 spanCartTotal.InnerText = CartTotal.ToString();
                 spanTotal.InnerText = "Rs. " + Total.ToString();
                 spanDiscount.InnerText = "- " + (CartTotal - Total).ToString();
+
+                hdCartAmount.Value = CartTotal.ToString();
+                hdCartDiscount.Value = (CartTotal - Total).ToString();
+                hdTotalPayed.Value = Total.ToString();
             }
             else
             {
-                h4Noitems.InnerText = "Your Shopping Cart is Empty";
-                divpricedetails.Visible = false;
+                Response.Redirect("~/Products.aspx");
             }
         }
         else
         {
-
-            h4Noitems.InnerText = "Your Shopping Cart is Empty";
-            divpricedetails.Visible = false;
+            Response.Redirect("~/Products.aspx");
         }
     }
 
-    protected void btnRemoveCart_Click(object sender, EventArgs e)
+    protected void btnPaytm_Click(object sender, EventArgs e)
     {
-        string CookiePID = Request.Cookies["CartPID"].Value.Split('=')[1];
-
-        Button btn = (Button)(sender);
-
-        string PIDSIZE = btn.CommandArgument;
-
-        List<String> CookiePIDList = CookiePID.Split(',').Select(i => i.Trim()).Where(i => i != string.Empty).ToList();
-        CookiePIDList.Remove(PIDSIZE);
-        string CookiePIDUpdated = String.Join(",", CookiePIDList.ToArray());
-        if (CookiePIDUpdated == "")
+        if (Session["Username"] != null)
         {
-            HttpCookie CartProducts = Request.Cookies["CartPID"];
-            CartProducts.Values["CartPID"] = null;
-            CartProducts.Expires = DateTime.Now.AddDays(-1);
-            Response.Cookies.Add(CartProducts);
+            string USERID = Session["USERID"].ToString();
+            string PaymentType = "Paytm";
+            string PaymentStatus = "NotPaid";
+            string EMAILID = Session["USEREMAIL"].ToString();
+
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("insert into Purchase_Details values('" + USERID + "','" + hdPidSizeID.Value + "','" + hdCartAmount.Value + "','" + hdCartDiscount.Value + "','" + hdTotalPayed.Value + "','" + PaymentType + "','" + PaymentStatus + "',getdate(),'" + txtName.Text + "','" + txtAddress.Text + "','" + txtPinCode.Text + "','" + txtMobileNumber.Text + "') select SCOPE_IDENTITY()", con);
+                con.Open();
+                Int64 PurchaseID = Convert.ToInt64(cmd.ExecuteScalar());
+
+                Response.Write("<script>alert('Payment has Done Successfully!!! ');</script>");
+            }
         }
         else
         {
-            HttpCookie CartProducts = Request.Cookies["CartPID"];
-            CartProducts.Values["CartPID"] = CookiePIDUpdated;
-            CartProducts.Expires = DateTime.Now.AddDays(30);
-            Response.Cookies.Add(CartProducts);
+            Response.Redirect("~/SignIn.aspx");
         }
-
-        Response.Redirect("Cart.aspx");
-    }
-
-    protected void btnBuy_Click(object sender, EventArgs e)
-    {
-        if (Session["USERNAME"] != null)
-        {
-            Response.Redirect("~/Payment.aspx");
-        }
-        else
-        {
-            Response.Redirect("~/SignIn.aspx?rurl=cart");
-        }
-    }
-
-    protected override void InitializeCulture()
-    {
-        CultureInfo ci = new CultureInfo("en-IN");
-        ci.NumberFormat.CurrencySymbol = "₹";
-        Thread.CurrentThread.CurrentCulture = ci;
-
-        base.InitializeCulture();
     }
 }

@@ -21,7 +21,7 @@
 
         $(document).ready(function myfunction() {
             $("#btnCart").click(function myfunction() {
-                window.location.href = "/Cart.aspx";
+                window.location.href = "Cart.aspx";
             });
         });
 

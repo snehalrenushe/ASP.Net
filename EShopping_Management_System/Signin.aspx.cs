@@ -50,6 +50,9 @@ public partial class Signin : System.Web.UI.Page
 
             if (dt.Rows.Count != 0)
             {
+                Session["USERID"] = dt.Rows[0]["Uid"].ToString();
+                Session["USEREMAIL"] = dt.Rows[0]["Email"].ToString();
+
                 if (cb_Remember_Password.Checked)
                 {
                     Response.Cookies["uname"].Value = tb_Username.Text;
@@ -70,7 +73,18 @@ public partial class Signin : System.Web.UI.Page
                 if (U_Role == "User")
                 {
                     Session["Username"] = tb_Username.Text;
-                    Response.Redirect("~/UserHome.aspx");
+                    if (Request.QueryString["rurl"] != null)
+                    {
+                        if (Request.QueryString["rurl"] == "cart")
+                        {
+                            Response.Redirect("Cart.aspx");
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("~/UserHome.aspx");
+                    }
+
                 }
                 if (U_Role == "Admin")
                 {
