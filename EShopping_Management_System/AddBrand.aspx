@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMasterPage.master" AutoEventWireup="true" CodeFile="AddBrand.aspx.cs" Inherits="AddBrand" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-<br<<br /><br /><br />
+<br /><<br /><br /><br />
 <div class ="container ">
             <div class ="form-horizontal ">
                 <h2>Add Brand</h2>
